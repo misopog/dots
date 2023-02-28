@@ -12,7 +12,7 @@ xcompmgr
 nitrogen
 dunst
 unclutter
-lxpolkit
+lxsession
 libnotify
 nvim
 python-pip
