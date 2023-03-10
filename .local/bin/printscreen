@@ -1,0 +1,5 @@
+#!/bin/sh
+
+selection=$(hacksaw -f "-i %i -g %g")
+shotgun $selection &
+notify-send "Screenshot Taken"

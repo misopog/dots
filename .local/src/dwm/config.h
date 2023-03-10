@@ -35,20 +35,28 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray             = 1;   /* 0 means no systray */
 static const char *fonts[]          = { "JetBrains Mono:size=10", "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static const char dmenufont[]       = "JetBrains Mono:size=11";
+/*static const unsigned int baralpha = 0xd0;*/
+static const unsigned int baralpha = 1280731835;
+static const unsigned int borderalpha = OPAQUE;
+
+#define wal "/home/anon/.cache/wal/colors-wal-dwm.h"
+
+#if __has_include(wal)
+#include wal
+#else
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#454545";
 static const char col_gray3[]       = "#999999";
 static const char col_gray4[]       = "#606060";
 static const char col_gray5[]       = "#000000";
-/*static const unsigned int baralpha = 0xd0;*/
-static const unsigned int baralpha = 1280731835;
-static const unsigned int borderalpha = OPAQUE;
-
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
+
+/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
 	[SchemeSel]  = { col_gray4, col_gray5, col_gray2 },
 };
+#endif
+
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg        border     */
 	[SchemeNorm] = { OPAQUE, OPAQUE, borderalpha },
@@ -56,7 +64,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -67,7 +75,8 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "St",       NULL,       NULL,            0,         0,          1,           0,        -1 },
-	{ "Alacritty",       NULL,       NULL,            0,         0,          1,           0,        -1 },
+	{ "amenu",       NULL,       NULL,            0,         0,          1,           0,        -1 },
+	{ "Alacritty",NULL,       NULL,            0,         0,          1,           1,        -1 },
 	{ NULL,       NULL,       "Event Tester",  0,         0,          0,           1,        -1 }, /* xev */
 
 };
@@ -84,10 +93,22 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "[@]",      spiral },
+	{ "[\\]",     dwindle },
+	{ "D[]",      deck },
+	{ "TTT",      bstack },
+	{ "===",      bstackhoriz },
+	{ "HHH",      grid },
+	{ "###",      nrowgrid },
+	{ "---",      horizgrid },
+	{ ":::",      gaplessgrid },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ NULL,       NULL },
+ 
 };
-
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
@@ -107,13 +128,12 @@ static const char *termcmd[]  = { "st"};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
- 	{ MODKEY,                       XK_w,      spawn,          SHCMD("chromium") },
- 	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("qutebrowser") },
+ 	{ MODKEY,                       XK_w,      spawn,          SHCMD("firefox") },
 	{ MODKEY,			                  XK_d,	     spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ 0,		     XF86XK_AudioRaiseVolume,      spawn, 	       SHCMD("upvol")   },
-	{ 0, 	     	 XF86XK_AudioLowerVolume,      spawn, 	       SHCMD("downvol") },
-  { 0,                XF86XK_AudioMute,      spawn,          SHCMD("mutevol") },
+	{ 0,		     XF86XK_AudioRaiseVolume,      spawn, 	       SHCMD("changevolume up")   },
+	{ 0, 	     	 XF86XK_AudioLowerVolume,      spawn, 	       SHCMD("changevolume down") },
+  { 0,                XF86XK_AudioMute,      spawn,          SHCMD("changevolume mute") },
   { 0,	                PrintScreenDWM,	     spawn,	         SHCMD("printscreen") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -128,7 +148,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
+  { MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY|ShiftMask,             XK_space,  setlayout,      {0} },
 	{ MODKEY,                       XK_space,  togglefloating, {0} },
@@ -145,8 +166,28 @@ static Key keys[] = {
 	TAGKEYS(                        XK_5,                      4)
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} }
-};
+	TAGKEYS(                        XK_8,                      7)
+	TAGKEYS(                        XK_9,                      8)
+	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} }, /* with my dotfiles, it restarts dwm, it does not close it*/
+  { MODKEY|ShiftMask,             XK_q,      spawn,          SHCMD("quitdwm")},
+	{ MODKEY,                       XK_i,      incrgaps,       {.i = +1 } },
+	{ MODKEY,                       XK_u,      incrgaps,       {.i = -1 } },
+/*	{ MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_o,      incrogaps,      {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_6,      incrihgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_7,      incrivgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_8,      incrohgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_9,      incrovgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+*/
+}; 
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
