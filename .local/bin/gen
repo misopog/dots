@@ -1,0 +1,9 @@
+#!/bin/sh
+
+INTDIR=$PWD
+SITEDIR="/home/anon/site/"
+
+cd $SITEDIR
+rm dst/.files
+ssg src dst "akit0's blog" 'https://www.akit0.moe'
+cd $INTDIR

@@ -1,0 +1,7 @@
+#!/bin/sh
+InitialPWD=$PWD
+
+cd /home/anon/.local/src/suckless/dwm/;
+doas make clean install;
+pkill dwm;
+cd $InitialPWD

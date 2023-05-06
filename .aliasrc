@@ -1,0 +1,23 @@
+#!/bin/sh
+
+alias a="alias"
+
+a ls="ls --color=auto"
+a l="ls -l"
+a la="ls -la"
+a ll="ls -laH"
+a mkdir="mkdir -p"
+a code="vscodium"
+a vim="nvim"
+a se="sudoedit"
+a jc="journalctl -xe"
+a jcu="journalctl -xeu"
+a sc="systemctl"
+a ssc="sudo systemctl"
+a aedit="$EDITOR ~/.aliasrc"
+a asrc="source ~/.aliasrc"
+a screen="maim ~/pix/screen-$(date +%H:%M:%S_%d.%m).png"
+a wall="feh --bg-fill"
+a vim="nvim"
+a n="nvim"
+a v="/bin/vim"

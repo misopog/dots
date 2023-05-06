@@ -1,0 +1,17 @@
+#!/bin/sh
+
+
+case $1 in
+  full)
+maim ~/pix/screen-$(date +%H:%M:%S_%d.%m).png
+notify-send "Screenshot Taken!"
+  ;;
+select)
+maim -g $(slop) ~/pix/screen-$(date +%H:%M:%S_%d.%m).png | xclip -selection clipboard -t image/png
+notify-send "Screenshot Taken!"
+  ;;
+
+  *)
+    echo 'Please use the "full" argument for fullscreen or the "select" argument for a selected part of the screen.'
+  ;;
+esac

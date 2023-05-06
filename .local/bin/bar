@@ -1,0 +1,3 @@
+#!/bin/sh
+conky -c ~/.config/conky/conkyrc | while read -r; do xsetroot -name "$REPLY"; done &
+
