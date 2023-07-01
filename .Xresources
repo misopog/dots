@@ -38,3 +38,16 @@
 *.color7:       #b9b9b9
 *.color15:      #f7f7f7
 
+URxvt.geometry: 92x24
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
+!! Common Keybinds for Navigations
+URxvt.keysym.Meta-Up: command:\033]720;1\007
+URxvt.keysym.Meta-Down: command:\033]721;1\007
+

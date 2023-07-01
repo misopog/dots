@@ -2,7 +2,7 @@
 
 send_notification() {
 	volume=$(pamixer --get-volume)
-	dunstify -a "changevolume" -u low -r "9993" -h int:value:"$volume" -i "volume-$1" "vol: ${volume}%" -t 2000
+  notify-send -h int:value:$volume "vol: "
 }
 
 case $1 in
@@ -18,7 +18,7 @@ down)
   send_notification $1
 	;;
 mute)
-		dunstify -i volume-mute -a "changevolume" -t 2000 -r 9993 -u low "Muted"
+		notify-send "Muted" &
   wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle &&
 kill -40 "$(cat ~/.cache/pidofbar)"
 	;;

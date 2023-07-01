@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# remove the last wallpaper
+rm ~/.cache/lastwall
+
+# shuffle function
+shuffle=$(find ~/pix/wall -type f -name "*.jpg" -o -name "*.png" | shuf -n 1 )
+
+# create a file to log the last wallpaper 
+touch ~/.cache/lastwall
+
+# echo the wallpaper into the file
+echo $shuffle > ~/.cache/lastwall
+
+# set the wallpaper
+xwallpaper --zoom $shuffle
+

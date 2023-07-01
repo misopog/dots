@@ -22,11 +22,11 @@ update_time () {
 update_bat () { 
 	# you might need to change the path depending on your device
 	read -r bat_capacity </sys/class/power_supply/BAT0/capacity
-	bat="🔋 $bat_capacity%"
+	bat="$bat_capacity%"
 }
 
 update_vol () { 
-	vol="$([ "$(pamixer --get-mute)" = "false" ] && printf '🔊 ' || printf '🔇 ')$(pamixer --get-volume)%"
+	vol="$([ "$(pamixer --get-mute)" = "false" ] && printf '󰕾 ' || printf '󰝟 ')$(pamixer --get-volume)%"
 }
 
 
@@ -43,7 +43,7 @@ update_vol
 
 display () { 
 	#printf "%s\n" " $event [$weather] [$memory $cpu] [$bat] [$backlight] [$vol] $time "
-	xsetroot -name " [🧠 $memory] [🖥 $cpu] [$bat] [$vol] [📅 $date] [🕗 $time] "
+	xsetroot -name " [󰍹 $memory] [ $cpu] [  $bat] [$vol] [ $date] [󰥔 $time] "
 }
 
 # SIGNALLING
