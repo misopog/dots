@@ -26,7 +26,7 @@ update_bat () {
 }
 
 update_vol () { 
-	vol="$([ "$(pamixer --get-mute)" = "false" ] && printf '󰕾 ' || printf '󰝟 ')$(pamixer --get-volume)%"
+	vol="$([ "$(pamixer --get-mute)" = "false" ] && printf 'VOL: ' || printf 'MUTE ')$(pamixer --get-volume)%"
 }
 
 
@@ -43,7 +43,7 @@ update_vol
 
 display () { 
 	#printf "%s\n" " $event [$weather] [$memory $cpu] [$bat] [$backlight] [$vol] $time "
-	xsetroot -name " [󰍹 $memory] [ $cpu] [  $bat] [$vol] [ $date] [󰥔 $time] "
+	xsetroot -name " [MEM: $memory] [BAT: $bat] [$vol] [$date] [$time] "
 }
 
 # SIGNALLING
