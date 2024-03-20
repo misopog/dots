@@ -151,6 +151,7 @@ exec_always --no-startup-id dunst
 exec_always --no-startup-id lxpolkit
 exec_always --no-startup-id pactl load-module module-switch-on-connect
 exec_always --no-startup-id xcompmgr
+exec_always --no-startup-id numlockx
 
 # binds
 
