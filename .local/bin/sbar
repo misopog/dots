@@ -42,8 +42,7 @@ update_vol () {
 update_vol
 
 display () { 
-	#printf "%s\n" " $event [$weather] [$memory $cpu] [$bat] [$backlight] [$vol] $time "
-	xsetroot -name " [MEM: $memory] [BAT: $bat] [$vol] [$date] [$time] "
+	printf "$s\n" " [MEM: $memory] [BAT: $bat] [$vol] [$date] [$time] "
 }
 
 # SIGNALLING
