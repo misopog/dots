@@ -7,6 +7,7 @@ lxpokit & # polkit kek
 notify-send "DWM Initialized" "Ready to use" & 
 sbar &
 pactl load-module module-switch-on-connect &
+numlockx &
 echo "no" > ~/.cache/wmexit &
 while true
 do
